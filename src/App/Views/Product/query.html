@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block body %}
+<h1>Tariffs Query</h1>
+
+{% if current_user %}
+<table border="1" cellspacing="2" width="450px">
+  <tr>
+    <th>Tariff name</th>
+    <th>Annual costs</th>
+  </tr>
+  {% for item in items%}
+  <tr>
+    <td>{{ item['title'] }}</td>
+    <td>{{ item['annuallCost'] }}</td>
+  </tr>
+  {% endfor%}
+</table>
+
+<a href="/logout">Logout</a>
+{% else %}
+<a href="/signup/new">please Signup</a> or <a href="/login">Login</a> to see all
+products {% endif %} {% endblock %}

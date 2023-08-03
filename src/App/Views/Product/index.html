@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block body %}
+<h1>available Tariffs</h1>
+
+{% if current_user %}
+<table border="1" cellspacing="2">
+  <tr>
+    <th>name</th>
+    <th>type</th>
+    <th>baseCost</th>
+    <th>includedKwh</th>
+    <th>additionalKwhCost</th>
+  </tr>
+  {% for product in products%}
+  <tr>
+    <td>{{ product['title'] }}</td>
+    <td>{{ product['type'] }}</td>
+    <td>{{ product['baseCost'] }}</td>
+    <td>{{ product['includedKwh'] ?? 0 }}</td>
+    <td>{{ product['additionalKwhCost'] }}</td>
+  </tr>
+  {% endfor%}
+</table>
+<p>Secure electricity tariff</p>
+<form name="ElectricityTariffRequest" action="/products/query" method="post">
+  <input type="number" name="consumption" placeholder="3500" />
+  <input type="submit" value="see more" />
+</form>
+<a href="/logout">Logout</a>
+{% else %}
+<a href="/signup/new">please Signup</a> or <a href="/login">Login</a> to see all
+products {% endif %} {% endblock %}
